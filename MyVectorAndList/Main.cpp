@@ -24,6 +24,19 @@ int main()
 
 	std::cout << "******************************\n";
 
+	testVector1.resize(10, std::nothrow);
+	std::cout << "Lenght: " << testVector1.getLength() << "\n";
+	std::cout << "Capacity: " << testVector1.getCapacity() << "\n";
+	testVector1.printData();
+
+	std::cout << "******************************\n";
+
+	testVector1.resize(15, std::nothrow);
+	std::cout << "Lenght: " << testVector1.getLength() << "\n";
+	std::cout << "Capacity: " << testVector1.getCapacity() << "\n";
+	testVector1.printData();
+
+	/*
 	MyVector<int> testVector2(10);
 	for (int i = 21; i <= 30; ++i) {
 		testVector2.push_back(i);
@@ -44,7 +57,7 @@ int main()
 	std::cout << "******************************\n";
 
 	resultVector.push_back(99);	//should get here message that vector full
-
+	*/
 	std::cout << "\n";
 	std::cout << "******************************\n";
 	std::cout << "LIST\n";

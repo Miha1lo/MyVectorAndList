@@ -24,6 +24,15 @@ public:
 		}
 	}
 
+	MyVector(size_t newCapacity, std::nothrow_t) : length(0), capacity(newCapacity)
+	{
+		data = new(std::nothrow) T[capacity];
+		if (data == nullptr)
+		{
+			capacity = 0;
+		}
+	}
+
 
 	~MyVector()
 	{
@@ -37,15 +46,6 @@ public:
 		if (data && otherVector.data)
 		{
 			delete[] data;
-			/*
-			data = new T[otherVector.capacity];
-			length = otherVector.length;
-			capacity = otherVector.capacity;
-			for (size_t i = 0; i < length; i++)
-			{
-				data[i] = otherVector.data[i];
-			}
-			*/
 
 			length = otherVector.length;
 			capacity = otherVector.capacity;
@@ -101,6 +101,27 @@ public:
 	size_t getCapacity() const
 	{
 		return capacity;
+	}
+
+	void resize(size_t newSize, std::nothrow_t)
+	{
+		T* newData = new(std::nothrow) T[newSize];
+		if (newData == nullptr)
+		{
+			std::cout << "Resize failed" << std::endl;
+			return;
+		}
+
+		size_t copySize = (newSize < length) ? newSize : length;
+		for (size_t i = 0; i < copySize; ++i)
+		{
+			newData[i] = data[i];
+		}
+
+		delete[] data;
+		data = newData;
+		length = copySize;
+		capacity = newSize;
 	}
 
 	void printData() const
